@@ -1,0 +1,5 @@
+name: DaisukeFFA
+main: com.nekonyan.daisukeffa.DaisukeFFA
+version: 1.0
+commands:
+  ffastage:

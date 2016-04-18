@@ -2,16 +2,16 @@ package com.nekonyan.daisukeffa.manager;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter.Red;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
 import com.nekonyan.daisukeffa.DaisukeFFA;
 
@@ -74,10 +74,285 @@ public class StageManager {
 			yml.set("dev", devName);
 			p.sendMessage(DaisukeFFA.prefix + ChatColor.YELLOW + stage + "の作者を" + devName + "にしました。");			
 		}else{
-			p.sendMessage(DaisukeFFA.prefix + ChatColor.RED + stage + "の作者は登録されています。");
+			p.sendMessage(DaisukeFFA.prefix + ChatColor.RED + stage + "は存在しません。");
 		}
 	}
 	
+	public static Location loadfirstSpawn(String stage){
+		String deta = "";
+		File file = new File("plugins/DaisukeFFA/stages" + stage.toString() + ".yml");
+		if(file.exists()){
+			YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+			deta = config.getString("firstspawn");
+		}
+		return loadfirstSpawn(deta);
+	}
+	
+	public static Location loadsecondSpawn(String stage){
+		String deta = "";
+		File file = new File("plugins/DaisukeFFA/stages" + stage.toString() + ".yml");
+		if(file.exists()){
+			YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+			deta = config.getString("secondspawn");
+		}
+		return loadsecondSpawn(deta);
+	}
+	
+	public static Location loadthirdSpawn(String stage){
+		String deta = "";
+		File file = new File("plugins/DaisukeFFA/stages" + stage.toString() + ".yml");
+		if(file.exists()){
+			YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+			deta = config.getString("thirdspawn");
+		}
+		return loadthirdSpawn(deta);
+	}
+	
+	public static Location loadfourthSpawn(String stage){
+		String deta = "";
+		File file = new File("plugins/DaisukeFFA/stages" + stage.toString() + ".yml");
+		if(file.exists()){
+			YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+			deta = config.getString("fourthspawn");
+		}
+		return loadfourthSpawn(deta);
+	}
+	
+	public static Location loadLobbySpawn(String stage){
+		String deta = "";
+		File file = new File("plugins/DaisukeFFA/stages" + stage.toString() + ".yml");
+		if(file.exists()){
+			YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+			deta = config.getString("spawn");
+		}
+		return loadLobbySpawn(stage);
+	}
+	
+	  public static void setFirstSpawn(String stage, Player player)
+	  {
+	    File file = new File("plugins/DaisukeFFA/stages/" + stage.toString() + ".yml");
+	    if (file.exists())
+	    {
+	      YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+	      Location loc = player.getLocation();
+	      String world = loc.getWorld().getName();
+	      double x = loc.getX();
+	      double y = loc.getY();
+	      double z = loc.getZ();
+	      float yaw = loc.getYaw();
+	      float pitch = loc.getPitch();
+	      String locdeta = world + "/" + x + "/" + y + "/" + z + "/" + yaw + "/" + pitch;
+	      config.set("firstspawn", locdeta);
+	      try
+	      {
+	        config.save(file);
+	      }
+	      catch (IOException e)
+	      {
+	        e.printStackTrace();
+	      }
+	      player.sendMessage(ChatColor.GREEN + stage + "の１つ目のスポーン位置を" + locdeta + "に設定しました");
+	    }
+	    else
+	    {
+	      player.sendMessage(ChatColor.RED + stage + "は存在しません");
+	    }
+	  }
+	  
+	  public static void setSecondSpawn(String stage, Player player)
+	  {
+	    File file = new File("plugins/DaisukeFFA/stages/" + stage.toString() + ".yml");
+	    if (file.exists())
+	    {
+	      YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+	      Location loc = player.getLocation();
+	      String world = loc.getWorld().getName();
+	      double x = loc.getX();
+	      double y = loc.getY();
+	      double z = loc.getZ();
+	      float yaw = loc.getYaw();
+	      float pitch = loc.getPitch();
+	      String locdeta = world + "/" + x + "/" + y + "/" + z + "/" + yaw + "/" + pitch;
+	      config.set("Secondspawn", locdeta);
+	      try
+	      {
+	        config.save(file);
+	      }
+	      catch (IOException e)
+	      {
+	        e.printStackTrace();
+	      }
+	      player.sendMessage(ChatColor.GREEN + stage + "の２つ目のスポーン位置を" + locdeta + "に設定しました");
+	    }
+	    else
+	    {
+	      player.sendMessage(ChatColor.RED + stage + "は存在しません");
+	    }
+	  }
+
+	  
+	  public static void setThirdSpawn(String stage, Player player)
+	  {
+	    File file = new File("plugins/DaisukeFFA/stages/" + stage.toString() + ".yml");
+	    if (file.exists())
+	    {
+	      YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+	      Location loc = player.getLocation();
+	      String world = loc.getWorld().getName();
+	      double x = loc.getX();
+	      double y = loc.getY();
+	      double z = loc.getZ();
+	      float yaw = loc.getYaw();
+	      float pitch = loc.getPitch();
+	      String locdeta = world + "/" + x + "/" + y + "/" + z + "/" + yaw + "/" + pitch;
+	      config.set("thirdspawn", locdeta);
+	      try
+	      {
+	        config.save(file);
+	      }
+	      catch (IOException e)
+	      {
+	        e.printStackTrace();
+	      }
+	      player.sendMessage(ChatColor.GREEN + stage + "の３つ目のスポーン位置を" + locdeta + "に設定しました");
+	    }
+	    else
+	    {
+	      player.sendMessage(ChatColor.RED + stage + "は存在しません");
+	    }
+	  }
+
+	  
+	  public static void setFourthSpawn(String stage, Player player)
+	  {
+	    File file = new File("plugins/DaisukeFFA/stages/" + stage.toString() + ".yml");
+	    if (file.exists())
+	    {
+	      YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+	      Location loc = player.getLocation();
+	      String world = loc.getWorld().getName();
+	      double x = loc.getX();
+	      double y = loc.getY();
+	      double z = loc.getZ();
+	      float yaw = loc.getYaw();
+	      float pitch = loc.getPitch();
+	      String locdeta = world + "/" + x + "/" + y + "/" + z + "/" + yaw + "/" + pitch;
+	      config.set("fourthspawn", locdeta);
+	      try
+	      {
+	        config.save(file);
+	      }
+	      catch (IOException e)
+	      {
+	        e.printStackTrace();
+	      }
+	      player.sendMessage(ChatColor.GREEN + stage + "の４つ目のスポーン位置を" + locdeta + "に設定しました");
+	    }
+	    else
+	    {
+	      player.sendMessage(ChatColor.RED + stage + "は存在しません");
+	    }
+	  }
+	  
+	  public static void setSpawn(Player player)
+	  {
+	    File file = new File("plugins/DaisukeFFA/config.yml");
+	    if (file.exists())
+	    {
+	      YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+	      Location loc = player.getLocation();
+	      String world = loc.getWorld().getName();
+	      double x = loc.getX();
+	      double y = loc.getY();
+	      double z = loc.getZ();
+	      float yaw = loc.getYaw();
+	      float pitch = loc.getPitch();
+	      String locdeta = world + "/" + x + "/" + y + "/" + z + "/" + yaw + "/" + pitch;
+	      config.set("spawn", locdeta);
+	      try
+	      {
+	        config.save(file);
+	      }
+	      catch (IOException e)
+	      {
+	        e.printStackTrace();
+	      }
+	      player.sendMessage(ChatColor.DARK_GREEN + "ロビーのスポーン位置を" + locdeta + "に設定しました。");
+	    }
+	    else
+	    {
+	      try
+	      {
+	        file.createNewFile();
+	        YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+	        Location loc = player.getLocation();
+	        String world = loc.getWorld().getName();
+	        double x = loc.getX();
+	        double y = loc.getY();
+	        double z = loc.getZ();
+	        float yaw = loc.getYaw();
+	        float pitch = loc.getPitch();
+	        String locdeta = world + "/" + x + "/" + y + "/" + z + "/" + yaw + "/" + pitch;
+	        config.set("spawn", locdeta);
+	        config.set("gametick", Integer.valueOf(300));
+	        config.set("maxplayer", Integer.valueOf(20));
+	        config.save(file);
+	      }
+	      catch (IOException e)
+	      {
+	        e.printStackTrace();
+	      }
+	    }
+	  }
+	  public static YamlConfiguration getConfig()
+	  {
+	    YamlConfiguration config = null;
+	    File file = new File("plugins/DaisukeFFA/config.yml");
+	    if (file.exists()) {
+	      config = YamlConfiguration.loadConfiguration(file);
+	    }
+	    return config;
+	  }
+
+	  public static Location getSpawn()
+	  {
+	    String sp = "";
+	    File file = new File("plugins/DaisukeFFA/config.yml");
+	    if (!file.exists())
+	    {
+	      try
+	      {
+	        file.createNewFile();
+	      }
+	      catch (IOException e)
+	      {
+	        e.printStackTrace();
+	      }
+	    }
+	    else
+	    {
+	      YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+	      if (config.contains("spawn")) {
+	        sp = config.getString("spawn");
+	      }
+	    }
+	    return loadspawn(sp);
+	  }
+
+
+
+	  public static Location loadspawn(String deta)
+	  {
+	    String[] s = deta.split("/");
+	    World world = Bukkit.getWorld(s[0]);
+	    double x = Double.parseDouble(s[1]);
+	    double y = Double.parseDouble(s[2]);
+	    double z = Double.parseDouble(s[3]);
+	    float yaw = Float.parseFloat(s[4]);
+	    float pitch = Float.parseFloat(s[5]);
+	    Location location = new Location(world, x, y, z, yaw, pitch);
+	    return location;
+	  }
 	
 
 }
